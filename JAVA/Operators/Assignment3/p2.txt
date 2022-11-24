@@ -1,0 +1,19 @@
+Program 2: Write the binary numbers for the following integers(on paper or .txt)
+123, 74, -60, ~11
+
+binary conversion of number
+         0    0  0  0  0 0 0 0
+         128 64 32 16  8 4 2 1
+123 =>    0   1  1  1  1 0 1 1
+
+74 =>     0   0  1  1  1 0 1 0
+
+-60 =>    0   0  1  1  1 1 0 0        //first find a  binary for 60 then find out its 2's compliment
+                                      // 00111100
+                                      // 11000011
+                                      //        1
+                                      ------------
+                                         11000100
+                                      ------------
+~11      0    0   0  0 1 0 1 1
+invert   1    1   1  1 0 1 0 0

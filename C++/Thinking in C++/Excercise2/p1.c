@@ -1,0 +1,5 @@
+
+int  fun() {
+	puts("Hello");
+
+}

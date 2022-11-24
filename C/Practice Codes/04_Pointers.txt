@@ -1,0 +1,739 @@
+61)
+Code:
+#include<stdio.h>
+int main(){
+   int i = 3;
+   int *j;
+   int **k;
+   j=&i;
+   k=&j;
+   printf("%u %u %d ",k,*k,**k);
+   return 0;
+}
+
+a) Address, Address, 3
+b) Address, 3, 3
+c) 3, 3, 3
+d) Compilation error
+
+Answer : a)
+Explanation:
+        Here k is pointing to j and j is to i
+                   *       *
+                k ---> j ----> i
+
+        Consider addresses of i,j,k are 100, 200 ,300 respectively
+        Now i = 3 , &i = 100
+            j = 100 , &j = 200
+            k = 200 , &k =300
+        So  k will give address of j variable i.e 200
+            *k prints the value inside variable j i.e 100
+            **k  will print the value of i variable i.e. 3
+
+
+
+
+62)
+Code:
+
+#include<stdio.h>
+int main(){
+   char far *p =(char far *)0x55550005;
+   char far *q =(char far *)0x53332225;
+   *p = 80;
+   (*p)++;
+   printf("%d",*q);
+   return 0;
+}
+
+a) 80
+b) 81
+c) 82
+d) Compilation error
+
+Answer : d)
+Explanation:
+	char far *p = (char far *)0x55550005;
+	
+	It gives compile time error for declaration. Here far is considered as idetifier  and after that again we are one more identifier i.e *p
+	thats why complier gives error expected ';' ,'=' , ','
+	 
+
+
+
+63)
+Code:
+#include<stdio.h>
+#include<string.h>
+int main(){
+register a = 25;
+int far *p;
+p=&a;
+printf("%d ",*p);
+return 0;
+}
+
+a) 25
+b) 4
+c) Address
+d) Compilation error
+
+Answer : d)
+Explanation:
+          a variable is declared with register storage class and we are accessing address of that variable.
+          Register storage class defines that variable can be stored in CPU registers for quick access. but it's just a request to the compiler. 
+          C compiler issues an error that address of register variable is requested
+
+
+
+
+64)
+Code:
+#include<stdio.h>
+#include<string.h>
+int main(){
+int a = 5,b = 10,c;
+int *p = &a,*q = &b;
+c = p - q;
+printf("%d" , c);
+return 0;
+}
+
+a) -1
+b) 5
+c) -5
+d) Compilation error
+
+Answer : a)
+Explanation:
+	
+        consider &a = 100, &b = 104
+        Here 
+        	p---> a , q---->b i.e p = 100 , q = 104
+        	
+        c = p-q this is equivalent to (p-q)/sizeof(DTP)
+          = (p-q)/sizeof(DTP)
+          = (100-104)/4
+          =  -4/4
+          = -1
+       Answer is -1
+
+65)
+Code:
+#include<stdio.h>
+unsigned long int (* avg())[3]{
+	static unsigned long int arr[3] = {1,2,3};
+	return &arr;
+}
+int main(){
+	unsigned long int (*ptr)[3];
+	ptr = avg();
+	printf("%d" , *(*ptr+2));
+	return 0;
+}
+
+a) 1
+b) 2
+c) 3
+d) Compilation error
+
+Answer : c)
+Explanation:
+	Ptr is an pointe to an integer array of size 3. 
+	avg function is used to initlize an array and it returns the base address of that array consider it as 100
+	therefore ptr = 100 
+		
+		| 1 | 2 | 3 |
+		100 108 116 124
+	        /
+	       /
+	 ptr |100|
+	 
+	printf("%d ", *(*ptr+2));
+	
+	*(*ptr+2) = *(*(base address 100) + 2)
+	          = *(100+2)
+	          = *(100+2*8)
+	          = *(116)
+	          = 3
+	 
+	  
+	
+	
+		
+		
+	
+
+66)
+Code:
+#include<stdio.h>
+int main(){
+int * p , b;
+b = sizeof(p);
+printf("%d" , b);
+return 0;
+}
+
+a) 2
+b) 4
+c) 8
+d) Compilation error
+
+Answer : c)
+Explanation:
+        p is integer pointer. Every pointer's size is 8 bytes. 
+        Therefore b = sizeof(p) 
+        	    = 8
+        Answer is 8 here								
+        
+
+67)
+Code:
+#include<stdio.h>
+int main(){
+int i = 5 , j;
+int *p , *q;
+p = &i;
+q = &j;
+j = 5;
+printf("%d %d",*p,*q);
+return 0;
+}
+
+a) 5 0
+
+b) 5 5
+
+c) 0 5
+
+d) 0 0
+
+Answer : b)
+Explanation:
+         Initially i= 5, j=Garbage
+         p is pointing to i and q is pointing to j
+         i = 5, j =garbage (consider &i=100, &j=200) 
+         p =100 , q = 200
+         
+       	value of j is changed to 5 and q is pointing over there 
+        Therefore 
+        Answer is *p = 5,*q = 5
+        
+
+68)
+Code:
+#include<stdio.h>
+int main(){
+int i = 5;
+int *p;
+p = &i;
+printf(" %u %u", *&p , &*p);
+return 0;
+}
+
+a) 5 Address
+b) Address Address
+c) Address 5
+d) Compilation error
+
+Answer : b)
+Explanation:
+        
+        consider &i = 100 and &p = 200
+        p = &i = 100 Now p is holding 100 value as a address
+
+        *&p = *200 = (value at)200  = 100
+        &*p = &i = 100
+	
+	Therefore Answer is Address Address (same addresses).
+
+69)
+Code:
+#include<stdio.h>
+int main(){
+int i = 100;
+printf("value of i : %d addresss of i : %u",i,&i);
+i++;
+printf("\nvalue of i : %d addresss of i : %u",i,&i);
+return 0;
+}
+
+a)  value of i : 100 addresss of i : Address
+    value of i : 101 addresss of i : Address
+
+b)
+    value of i : 100 addresss of i : Address
+    value of i : 100 addresss of i : Address
+
+c)
+    value of i : 101 addresss of i : Address
+    value of i : 101 addresss of i : Address
+
+d)  Compilation error
+
+Answer: a)
+Explanation:
+        Answer is value of i : 100 addresss of i : Address
+                  value of i : 101 addresss of i : Address
+        i = 100
+        In first print statement value of i 100 and its address  will be printed
+        
+        i++ will increment the value of i by 1
+        i = i+1 
+          = 101 
+        and in next print statement value of i 101 and address will be printed
+        
+        both addresses will be same
+        
+70)
+Code:
+#include<stdio.h>
+
+int main()
+{
+    static char *s[] = {"black", "white", "pink", "violet"};
+    char **ptr[] = {s+3, s+2, s+1, s}, ***p;
+    p = ptr;
+    ++p;
+    printf("%s", **p+1);
+    return 0;
+}
+
+a)	ink
+b)	ack
+c)      ite
+d)	let
+Answer: a)
+Explanation:	
+	s is an array of strings means each value of s is pointing to a particular string
+	consider 
+	      
+	string: black    white  pink  violet
+	         0       1      2     3 
+	 s ==> |  100  | 200  | 300 | 400 |   these are addresses of each string
+	add: 1000    1008   1016   1024  1032	
+	
+	ptr is an array of address of s+3, s+2, s+1, s
+	
+	ptr ==> | 1024 | 1016 | 1008 | 1000 |  
+	       2000   2008   2016   2024    2032
+	
+	character array p is pointing to the array ptr	
+	 
+	 p= 2000
+	 
+	++p will increment the address inside the pointer p
+	++p = p+1*(sizeofDTP)
+	    = p+1*8
+	    = 2000+8 
+	    = 2008
+	Now p is pointing to the address 2008 and value is 1016 which is s[3]
+	
+	printf("%s", **p+1);
+	
+	**p+1 = *(*2008) +1
+	      = *(value at 2008)+1
+	      = *1016 + 1
+	      =  value at 1016 + 1
+	      = 300 + 1
+	      = 300+ 1*sizeof(DTP)
+	      = 300 + 1*1
+	**p+1 = 301
+	  
+	  Now at 300 "Pink" string is stored 
+	   
+	  Using %s we are printing string at address 301 i.e ink
+	  
+	  So answer is 'ink'
+	
+71)
+Code:
+#include<stdio.h>
+
+int main()
+{
+    int i=3, *j, k;
+    j = &i;
+    printf("%d\n", i**j*i+*j);
+    return 0;
+}
+
+a)	30
+b)	27
+c)	9
+d)	3
+Answer: a)
+Explanation:
+        i = 3 consider &i = 100  
+        *j = &i = 100
+        	
+        	  i
+           *	 ---
+        j ----> |   | 
+        	| 3 |
+        	 ---
+              100   104
+              	
+        i * (*j) * i + (*j)	= 3 * 3 * 3 + 3
+                        	= 9 * 3 +3
+                        	= 27 + 3
+                        	= 30
+        Answer is 30
+
+
+72)
+Code:
+#include<stdio.h>
+
+int main()
+{
+    int x=30, *y, *z;
+    y=&x; 	/*Assume address of x is 500 and integer is 4 byte size */
+    z=y;
+    *y++=*z++;
+    x++;
+    printf("x=%d, y=%d, z=%d\n", x, y, z);
+    return 0;
+}
+
+a)	x=31, y=502, z=502
+b)	x=31, y=500, z=500
+c)	x=31, y=498, z=498
+d)	x=31, y=504, z=504
+
+Answer: d)
+Explanation:
+
+         x= 30 , y = &x =500, z = 500
+
+         *z++           = *z++                     //++ has higher priority than *
+                        = *(z+1*sizeof(DTP))       // post increment is done 
+                        		           // temp = z , z= z+1 return temp
+                        		           //means previous value of z i.e. 500 will be returned
+                        
+                        = *(500)
+                        = 30                       // z+1*sizeof(DTP) = 500+1*4 = 504
+------------------------------------------------------------------------------------------
+		
+	*y++    	 = *y++                     //++ has higher priority than *
+                        = *( y+1*sizeof(DTP))       // post increment is done 
+                        		            // temp = y;  y= y+1; return temp
+                        		            //means previous value of y i.e. 500 will be returned
+                        = *(500)
+                        = 30                        // y+1*sizeof(DTP) = 500+1*4 = 504 
+         
+         therefore z = 504, y=504                     
+               
+         x  =  30                           
+         increment value of x = x++
+         		      = x+1 = 30+1
+         now x  = 31
+
+         Hence Answer is 31, 504,504
+         
+73)
+Code:
+#include<stdio.h>
+
+int main()
+{
+    int ***r, **q, *p, i=8;
+    p = &i;
+    q = &p;
+    r = &q;
+    printf("%d, %d, %d\n", *p, **q, ***r);
+    return 0;
+}
+
+a)	8, 8, 8
+b)	4000, 4002, 4004
+c)	4000, 4004, 4008
+d)	4000, 4008, 4016
+
+Answer: a)
+Explanation:
+        Answer is 8 8 8
+        consider &i = 100, &p = 200, &q = 300 
+        i = 8
+        p = &i = 100
+        q = &p = 200
+        r = &q = 300
+
+           	   *      *       *
+        	r ---> q ---> p ---> i
+address       	      300   200    100
+values         300    200   100     8	
+		
+        From r to i,  3 pointers are required 
+        ***r = **(value at 300)
+            = **(200)
+            = *(value at 200)
+            = *(100)
+            = 8
+        
+        **q = *(value at 200)
+            = *(100)
+            = 8
+             
+        *p = value at 100
+           = 8
+
+
+
+74)
+Code:
+#include<stdio.h>
+
+void fun(void *p);
+int i;
+
+int main()
+{
+    void *vptr;
+    vptr = &i;
+    fun(vptr);
+    return 0;
+}
+void fun(void *p)
+{
+    int **q;
+    q = (int**)&p;
+    printf("%d\n", **q);
+}
+
+a)	Error: cannot convert from void** to int**
+b)	Garbage value
+c)	0
+d)	No output
+
+Answer: c)
+Explanation:
+        Answer is 0
+        consider &i = 100, &vptr = 200
+        vptr is void pointer. It is passed to the function fun i.e address 100 is passed. 
+        In function fun that address is typecasted to int** because for dereferencing operation void pointer should be typecasted.
+        
+        here &p = 300, &q = 400(consider it)
+        q = &p 
+          = 300
+
+
+        q ---> p ---> i
+values  300    100    0
+address 400    300   100
+
+        **q = **(300) 
+           = *(value at 300) 
+           = *(100) 
+           = value at 100 
+           = 0 (because i is global variable and by default value is 0)
+
+75)
+Code:
+#include<stdio.h>
+
+int main()
+{
+    char *str;
+    str = "%s";
+    printf(str, "K\n");
+    return 0;
+}
+
+a)	Error
+b)	No output
+c)	K
+d)	%s
+Answer: c)
+Explanation:
+        str contain "%s" aas a string. %s is a format specifier which is used to print the string
+        printf(str, "K\n");     Here str is replaced by "%s" and K will be printed on console
+
+
+76)
+Code:
+#include<stdio.h>
+int *check(static int, static int);
+
+int main()
+{
+    int *c;
+    c = check(10, 20);
+    printf("%d\n", c);
+    return 0;
+}
+int *check(static int i, static int j)
+{
+    int *p, *q;
+    p = &i;
+    q = &j;
+    if(i >= 45)
+        return (p);
+    else
+        return (q);
+}
+
+a)	10
+b)	20
+c)	Error: Non portable pointer conversion
+d)	Error: cannot use static for function parameters
+Answer: d)
+Explanation:
+	Answer is cannot use static for function parameters
+	For function parameters we cannot use storage classes like static, extern or auto. 
+	
+77)
+Code:
+#include<stdio.h>
+
+int main()
+{
+    void *vp;
+    char ch=74, *cp="JACK";
+    int j=65;
+    vp=&ch;
+    printf("%c", *(char*)vp);
+    vp=&j;
+    printf("%c", *(int*)vp);
+    vp=cp;
+    printf("%s", (char*)vp+2);
+    return 0;
+}
+
+a)	JCK
+b)	J65K
+c)	JAK
+d)	JACK
+Answer: d)
+Explanation:
+	Answer is JACK
+	In first print, vp is casted to char* and then dereference operation is performed 
+	vp = &ch . vp is pointing to ch so printing 74 using %c specifier gives 'J' value
+	
+	vp = &j poinitng to int value 65. 65 is ascii value of 'A'. Thus it will print A
+	
+	vp = cp now vp is pointing to the string "JACK" 
+	
+	(char*)vp+2 = vp+2 
+		    = vp+2*sizeof(DTP) 
+		    = vp + 2 
+		    = 102 
+	at 102. 'C' character is there.
+		
+		0 1 2 3
+	cp ==> J A C K 
+	     100  /
+		 /	
+		vp     
+		 
+	%s is used to print so after 102 all values are get printed i.e 'CK'
+	
+	Final ans is 'JACK' 
+
+78)
+Code:
+#include<stdio.h>
+
+int main()
+{
+    int arr[3] = {2, 3, 4};
+    char *p;
+    p = arr;
+    p = (char*)((int*)(p));
+    printf("%d, ", *p);
+    p = (int*)(p+1);
+    printf("%d", *p);
+    return 0;
+}
+
+a)	2, 3
+b)	2, 0
+c)	2, Garbage value
+d)	0, 0
+Answer: b)
+Explanation:
+	Answer is 2, 0
+	p is pointing to starting address(consider 100) of an array arr
+	*(100) gives value 2
+	
+	for expression p = (int*)(p+1) = 100+1*sizeof(DTP)
+					= 100+1*1 
+					= 101
+					
+	value at 101 is 0 because internally value of 2 is stored in binary format
+	
+	0000  0000 | 0000 0000 | 0000 0000 | 0000 0010
+	   100          101         102        103
+
+	   
+79)
+Code:
+#include <stdio.h>
+int main()
+{
+    char    *str="Core2Web";
+    printf("%c\n",*&*str);
+    return 0;
+}
+
+a) Error
+b) Core2Web
+c) C
+d) *C
+
+Answer: c)
+Explanation:
+	Answer is C
+	str is a character pointer and it is pointing to the string "Core2web".
+	
+		    0   1   2   3   4   5   6   7
+	str ----> | C | o | r | e | 2 | w | e | b |
+	         100  
+	         
+	Consider address  in str is 100 
+	*&*str = *&(first index) 
+		= *(& first index) 
+		= *(100)
+		= C
+	
+	
+
+80)
+Code:
+#include <stdio.h>
+int main()
+{
+    int     iVal;
+    char    cVal;
+    void    *ptr;   // void pointer
+    iVal=50; cVal=65;
+
+    ptr=&iVal;
+    printf("value =%d,size= %d\n",*(int*)ptr,sizeof(ptr));
+
+    ptr=&cVal;
+    printf("value =%d,size= %d\n",*(char*)ptr,sizeof(ptr));
+    return 0;
+}
+
+a) Error
+b) value =50,size= 8
+value =65,size= 8
+c) value =50,size= 8
+value =65,size= 1
+d) Garbage Values
+
+Answer: b)
+Explanation:
+	 Answer is value =50,size= 8
+		   value =65,size= 8
+	 
+	 ptr is holding address of ival but ptr is void pointer and for dereferencing we have to typecast it 
+	 (int*)ptr --> this will typecast void* to int* and then dereference to get actual value
+	 
+	 *(int*)ptr gives value as 50
+	 
+	 Same for next operation *(char*)ptr gives value as 65
+	 
+	 Size of any pointer is always 8 byte
+

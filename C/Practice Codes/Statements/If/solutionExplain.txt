@@ -1,0 +1,39 @@
+Here I am giving only some tricks about logic please think on this try some code If you fail to understand then tell me I will
+send you considered
+
+
+Q 5:There are two types used to store floating values
+  1. single precision format : float values
+  2. double precision format: for double values
+  refer this one you will get to know
+    https://www.log2base2.com/storage/how-float-values-are-stored-in-memory.html
+
+Q 14. You have to find that entered num is in given range or not
+suppose you have one num = 10  how would you decide that it is in between 5 and 15. because it is greater than 5 and less than 15
+Right!
+
+Q 15. Vowels = aeiou or AEIOU
+  if your entered character is any one of them then it is vowel
+  e.g. char ch = 'e'
+        so e is vowel how do you know that? ..... its satisfies the conditions that is should be in this {a,e,i,o,u}
+        means here you have to use || operator between every condition.
+        Or operator for what? We want only one condition to be satisfied means a || e || i || o || u
+        Ya five paiki konthi ek asel tr te vowel right mhnje ek jari true asel tr condition true havi na mhnun OR(||) operator use kelay
+
+
+Q 16. Here you  have to find out lower, uprer or special character
+      There is concept of ASCII value Means every character is internally stored in integer format
+      e.g char a = 'A';
+          so A is treated as 65 (try to print in %d format insted of %c you will get this value)
+      So for upper case ASCII range is 65-90 means if your character is belong to this range then it is upper
+      for lower range is 97-122
+      for special character 32-47, 58-64, 91-96,123-126
+
+      refer this for ascii values ===> https://www.cs.cmu.edu/~pattis/15-1XX/common/handouts/ascii.html
+
+
+      means here you have to use only and(&&) operator  and < > relational operators
+
+
+Please think on this conditions and
+All the best !!!

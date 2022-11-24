@@ -1,0 +1,30 @@
+gcc p1.c
+./a.out
+gcc p2.c
+./a.out
+gcc p3.c
+./a.out
+gcc p4.c
+./a.out
+gcc p5.c
+./a.out
+gcc p6.c
+./a.out
+gcc p7.c
+./a.out
+gcc p8.c
+./a.out
+gcc p9.c
+./a.out
+gcc p10.c
+./a.out
+gcc p11.c
+./a.out
+gcc p12.c
+./a.out
+gcc p13.c
+./a.out
+gcc p14.c
+./a.out
+gcc p15.c
+./a.out

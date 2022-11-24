@@ -1,0 +1,15 @@
+___________________________________________________ OVERLODING ______________________________________________________________________________
+1. Overloaded means a method with the same name differing in the num or types of the parameters 
+2. We can give same name to the num of method which perform somewhat same operation. so why give the different name to the method.
+2. Oveloading can be done by using only
+	- Method name 
+	- Parameter type and numbers
+4.We cannot use return type for the overloading
+	consider following two method 
+	int f() {}
+	void f() {}
+	
+	how will the complier knows which one call  when method call happens
+	so the compiler wil give the error 
+
+	

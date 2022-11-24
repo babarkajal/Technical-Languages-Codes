@@ -1,0 +1,5 @@
+My name is kajal
+----- Node created -----: 
+Disease name: corona 	Discovered year:2019 	severity: 0
+----- Node created -----: 
+Disease name: chickepox 	Discovered year:1658 	severity: 1

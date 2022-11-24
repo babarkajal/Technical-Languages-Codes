@@ -1,0 +1,22 @@
+--------------- Convert the following decimal number into binary number ---------------------
+1. 8
+2. 4
+3. 5
+4. 128
+5. 225
+6. 480
+7. 360
+8. 526
+9. 940
+10.1230
+
+----------- Do the following operaions -------------------------
+take any random number x and y
+1. x<<3
+2. x>>4
+3. x & y
+4. x | y
+5. x ^ y
+
+
+ 

@@ -1,0 +1,52 @@
+//create node function
+struct node* createNode(struct node* head) {
+		//allocate memory
+		struct node* newNode = (struct node*)malloc(sizeof(struct node)); 
+		struct node* temp = head;
+		std::cin >> newNode->no;	//accpet data from user
+		newNode->next = NULL;
+
+		if(head == NULL){
+			head = newNode;
+		}else {
+			
+			while(temp->next != NULL) 	//traverse upto the last node
+				temp=temp->next;
+			temp->next = newNode;	
+		}
+	
+		return head;
+}//end of function
+
+//to get lenght of list
+int getLength(struct node *head) {
+	struct node *temp = head;
+	int count = 0;
+	while(temp != NULL ) {
+		count++;
+		temp = temp->next;
+	}
+	return count;
+
+}
+
+
+//display function
+int displayList(struct node* head) {
+	
+	struct node* temp =head;
+	
+	if(temp == NULL) {
+		std::cout << "\t******* List is Empty *******" << std::endl;
+	}else {
+		//last node condition
+		while(temp !=NULL) {
+			std::cout <<"|"<<temp->no <<"|"; 
+			temp = temp->next;
+			if(temp !=NULL) 	
+				std::cout << " --> ";	
+
+		}
+	}
+	std::cout << std::endl;
+}

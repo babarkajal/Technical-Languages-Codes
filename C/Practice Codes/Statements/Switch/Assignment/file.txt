@@ -1,0 +1,61 @@
+Leave those questions which will be clarified in tomorrow's lecture.
+
+
+1. As sir said that declarative statements are also one type of statements. And case label can have statments. Then 
+
+	if i write case 1:
+			int a;
+	Then why does it give error like case label can only consist of statements and declaration isnt a statement.
+
+
+yes declarative statments are one type of statements but case is one kind of label means complier will treat it as a jump instruction which can skip the inilization of or declaration of variables
+
+
+2.If switch cannot function without any case then why doesn't it give error ? 			
+
+3.Why does following code give warning but not error ?(Already sir covered it briefly in the lecture but did not understand).
+
+	switch(a) {
+
+		printf("Hello\n");
+	}
+Ans:
+	As Sir told that the previous compiler te switch without case la support kart hote mhnje error yet nhi. ani printf he case madhe use hot so 		indirectly apan as hi mhnu shakto ki printf switch madhe chalat.Fkt te case chya baher nhi chalat mhnun te fkt warning det ki statement 	cannot execute
+
+4.Why does below code does not give any warning:  Here the last printf will not execute as it is not present in the case.
+
+	switch(a) {
+
+		case 1:
+			printf("Helo\n");
+			break;
+		case 2:
+			printf("World\n");
+			break;
+		printf("THe Whole New World\n");
+	}
+
+
+
+5. Why is it required that the case labels should be reduced to integer. And why is it required that the switch should contain integer in the condition result.
+
+Ans:
+	for example consider we can use float for switch condition or for labels.
+	In datatype topic sir tought us that floating point's representation is different than intger .You might have face some situations where x = 5.2 and still x==5.2 condition is false  we think that x and 5.2 are same but they are not. to avoid this confusion integers are used instead 
+
+
+6. When we do
+
+	switch(a) {
+
+		case 1:
+			printf("1\n");
+			break;
+	}
+
+	Here a's value will be going to the switch statement at the run time(I guess) but why is it necessary to have the case labels as integer at the compile time.
+
+Ans: 
+	Values are checked at compile time so a should be integer when it is given to the switch statement
+	Semantic analysis phase is one of the phase of the compiler whose task it to check the type and if necessary then convert it into desired type
+	 
